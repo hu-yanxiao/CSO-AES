@@ -12,7 +12,7 @@ setup(
         'maml==2024.6.13',
         'matplotlib==3.8.0',
         'path==16.14.0',
-        'ase==3.23.1b1',
+        'ase==3.23.0',
         'dscribe==2.1.1',
         'Cython==3.0.11'
     ]
