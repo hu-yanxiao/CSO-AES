@@ -2,7 +2,7 @@
 Covering Set Optimazation driven Atomic Environment Sampling strategy for machine learning interatomic potential 
 
 # Installation
-cd CSO-AES/cso-ase
+cd CSO-AES/cso-aes
 
 python setup.py install
 
