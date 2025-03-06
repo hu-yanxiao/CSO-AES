@@ -1,0 +1,163 @@
+@SET DATAPATH /share/apps/cp2k/e5-2024.1_intelmpi/data
+
+&GLOBAL
+  PROJECT energy_force
+  PRINT_LEVEL LOW
+  RUN_TYPE ENERGY_FORCE
+&END GLOBAL
+
+&FORCE_EVAL
+  METHOD Quickstep
+  STRESS_TENSOR ANALYTICAL
+  &SUBSYS
+    &CELL
+     ABC 19.1018    7.6541   40.3300       
+     ALPHA_BETA_GAMMA  90 90 90
+     PERIODIC XYZ #Direction of applied PBC (geometry aspect)
+    &END CELL
+    #&COORD
+    #@INCLUDE 'coord.inc'
+    #&END COORD
+    &TOPOLOGY
+       COORD_FILE_NAME cp2k.xyz
+       COORD_FILE_FORMAT xyz
+    &END TOPOLOGY
+    &KIND O
+      ELEMENT O
+      BASIS_SET DZVP-MOLOPT-SR-GTH-q6
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND H
+      ELEMENT H
+      BASIS_SET DZVP-MOLOPT-SR-GTH-q1
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Sr
+      ELEMENT Sr
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Fe
+      ELEMENT Fe
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND La
+      ELEMENT La
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Mn
+      ELEMENT Mn
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Ni
+      ELEMENT Ni
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Co
+      ELEMENT Co
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Cu
+      ELEMENT Cu
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Li
+      ELEMENT Li
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND F
+      ELEMENT F
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Na
+      ELEMENT Na
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Zr
+      ELEMENT Zr
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND Si
+      ELEMENT Si
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+    &KIND P
+      ELEMENT P
+      BASIS_SET DZVP-MOLOPT-SR-GTH
+      POTENTIAL GTH-PBE
+    &END KIND
+  &END SUBSYS
+
+  &DFT
+    BASIS_SET_FILE_NAME ${DATAPATH}/BASIS_MOLOPT
+    BASIS_SET_FILE_NAME ${DATAPATH}/BASIS_MOLOPT_UCL
+    POTENTIAL_FILE_NAME ${DATAPATH}/GTH_POTENTIALS
+    WFN_RESTART_FILE_NAME ./cp2k-RESTART.wfn
+    CHARGE    0 #Net charge
+    MULTIPLICITY    1 #Spin multiplicity
+    &QS
+      EPS_DEFAULT 1.0E-10 #Set all EPS_xxx to values such that the energy will be correct up to this value
+    &END QS
+    &POISSON
+      PERIODIC XYZ #Direction(s) of PBC for calculating electrostatics
+      PSOLVER PERIODIC #The way to solve Poisson equation
+    &END POISSON
+    &XC
+      &XC_FUNCTIONAL PBE
+      &END XC_FUNCTIONAL
+      &VDW_POTENTIAL
+        POTENTIAL_TYPE PAIR_POTENTIAL
+        &PAIR_POTENTIAL
+          PARAMETER_FILE_NAME dftd3.dat
+          TYPE DFTD3(BJ)
+          REFERENCE_FUNCTIONAL PBE
+          #CALCULATE_C9_TERM T #Calculate C9-related three-body term, more accurate for large system
+        &END PAIR_POTENTIAL
+      &END VDW_POTENTIAL
+    &END XC
+    &MGRID
+      CUTOFF  400
+      REL_CUTOFF  40
+    &END MGRID
+    &SCF
+      MAX_SCF 30 #Maximum number of steps of inner SCF
+      EPS_SCF 1.0E-05 #Convergence threshold of density matrix of inner SCF
+#     SCF_GUESS RESTART #Use wavefunction from WFN_RESTART_FILE_NAME file as initial guess
+#     IGNORE_CONVERGENCE_FAILURE #Continue calculation even if SCF not converged, works for version >= 2024.1
+      &OT
+        PRECONDITIONER FULL_KINETIC #FULL_SINGLE_INVERSE is also worth to try. FULL_ALL is better but quite expensive for large system
+        MINIMIZER DIIS #CG is worth to consider in difficult cases
+        LINESEARCH 2PNT #1D line search algorithm for CG. 2PNT is default. 3PNT is more expensive but may be better. GOLD is best but very expensive
+        ALGORITHM STRICT #Algorithm of OT. Can be STRICT (default) or IRAC
+      &END OT
+      &OUTER_SCF
+        MAX_SCF 20 #Maximum number of steps of outer SCF
+        EPS_SCF 1.0E-05 #Convergence threshold of outer SCF
+      &END OUTER_SCF
+      &PRINT
+        &RESTART #Note: Use "&RESTART OFF" can prevent generating .wfn file
+          BACKUP_COPIES 0 #Maximum number of backup copies of wfn file. 0 means never
+        &END RESTART
+      &END PRINT
+    &END SCF
+  &END DFT
+  &PRINT
+    &FORCES ON #Print atomic forces
+     # FILENAME ./filename
+     # UNIT eV/angstrom
+    &END FORCES
+    &STRESS_TENSOR ON
+    &END STRESS_TENSOR
+  &END PRINT
+&END FORCE_EVAL

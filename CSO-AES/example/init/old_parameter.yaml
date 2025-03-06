@@ -1,0 +1,61 @@
+#part0 训练势函数
+#输出 --trained-pot-name=../../mtp/current_{current_num}.mtp 已经在代码里面
+
+mlp_nums : 1 #势函数的个数
+
+ele: ['Li','F']
+size: (1, 1, 1) #扩胞的大小
+ele_model: 1 #1对ele根据原子序数排序 2不进行重新排序
+
+
+#part1 创建work计算目录
+#mlp_MD:
+  #- npt: [300,400,500]
+  #- nvt: [300,400,500]
+  #- npt: [50, 100, 200, 300, 400,  600, 700,  900, 1000,1200]
+  #- nvt: [50, 100, 200, 300, 400,  600, 700,  900, 1000,1200]
+nvt_lattice_scaling_factor: [1] #可以做一个列表的nvt
+
+#part2 遍历work目录，开始lmp计算，qiming/taiying bsub<bsub.lsf,physics sbatch bsub.lsf
+task_submission_method: bsub<bsub.lsf
+
+#part3 采样
+#(1)根据分歧阈值筛选结构，并通过聚类进一步筛选计算结构
+das_ambiguity: True
+af_default: 0.01
+af_limit: 0.2
+af_failed: 0.5
+over_fitting_factor: 1.1
+af_adaptive: None
+
+#das_ambiguity=False 会选择此种分歧阈值计算方法
+threshold_low: 0.08 #分歧阈值，用于筛选结构
+threshold_high: 0.3
+select_stru_num: None
+
+end: 1        #统计分歧阈值的分布，[0,end]区间 num_elements表示列表的总元素个数
+num_elements: 6
+
+sample:
+    n: 5
+    cluster_threshold_init: 0.5
+    k: 2
+    clustering_by_ambiguity: True #挑选每一类中分歧阈值最大的几个数据
+#(2)优先级更高，scaling_mlp编码原子环境进行采样
+mlp_encode_model: True
+bw_method: Freedman_Diaconis # scott, Freedman_Diaconis, std(std/10), self_input
+bw: 0.01 #选择方法, self_input这个参数才有效
+body_list: ['two','three'] #同时考虑的多体编码
+mtp_type: 'l2k2.mtp'
+stru_num: [20,15,10]   #在某一覆盖率的情况下，每一轮最大结构采样数
+coverage_rate_threshold: [99.5,99.9,99.95] #列表必须与stru_num长度相同
+coverage_rate_method: mean #mean取平均值,min取最小值
+
+#part4 在scf_lammps_data目录下对筛选结构进行dft计算
+dft:
+  calc_dir_num: 5
+  force_threshold: 20 #大于力阈值的结构将丢弃(如果所有结构都大于力阈值，则挑选力最小的1个结构)
+ 
+  
+
+    

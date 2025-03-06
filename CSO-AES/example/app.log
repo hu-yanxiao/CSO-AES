@@ -1,0 +1,48 @@
+2025-03-06 17:52:00,786 INFO: main_0 | gen_0: start
+2025-03-06 17:52:00,862 INFO: mlp_0 has been submitted
+2025-03-06 17:53:51,008 INFO: All training_mlp tasks have been completed
+2025-03-06 17:53:51,199 INFO: LiF: Task is submitted
+2025-03-06 17:54:31,274 INFO: All MD calculations have been completed
+2025-03-06 17:54:34,324 INFO: Complete coding process.
+2025-03-06 17:54:36,917 INFO: mean_descriptor pre-sampling process. The number of classes:[15] The number of stru for all classes:[13] body_min_cover_stru:[3] type_coverage_rate:[[99.4755]] max_min_freq: [9, 1]
+2025-03-06 17:54:36,917 INFO: num of select stru [3, 3]
+2025-03-06 17:54:43,269 INFO: Complete the AEE_sampling process. The number of classes:[4, 10] The number of stru for all classes:[15, 12] body_min_cover_stru:[1, 2] type_coverage_rate:[[99.0884, 99.3132], [99.7086, 99.5629]] max_min_freq: [40, 16]
+2025-03-06 17:54:43,269 INFO: num of select stru [2, 2]
+2025-03-06 17:54:43,270 INFO: num of select_num_mean_pre_sample:3, num of select_num_AEE_sample:2, num of repetition:1, total_num:4
+2025-03-06 19:08:40,551 INFO: mtp already exists
+2025-03-06 19:08:40,591 INFO: All MD calculations have been completed
+2025-03-06 19:08:40,591 INFO: *_sample_filter.xyz already exists.(/work/phy-huangj/apps/CSO-AES/example/main_0/gen_0/work/4_sample_filter.xyz)
+2025-03-06 19:09:49,136 INFO: mtp already exists
+2025-03-06 19:09:49,141 INFO: All MD calculations have been completed
+2025-03-06 19:09:49,142 INFO: *_sample_filter.xyz already exists.(/work/phy-huangj/apps/CSO-AES/example/main_0/gen_0/work/4_sample_filter.xyz)
+2025-03-06 19:19:46,989 INFO: mtp already exists
+2025-03-06 19:19:46,993 INFO: All MD calculations have been completed
+2025-03-06 19:19:46,994 INFO: *_sample_filter.xyz already exists.(/work/phy-huangj/apps/CSO-AES/example/main_0/gen_0/work/4_sample_filter.xyz)
+2025-03-06 19:19:47,291 INFO: The 4 structures are divided into 4 dft calculation tasks to be submitted
+2025-03-06 19:19:47,291 INFO: In the process of checking whether the SCF calculation is complete......
+2025-03-06 19:20:17,426 INFO: All scf calculations have been completed
+2025-03-06 19:20:17,463 INFO: Active learning continues: gen_0 | abacus_completed_number:4 | Successful_collection_structure/scf_convergent_number:4 | force_threshold_number(20):4
+2025-03-06 19:20:20,152 INFO: main_0 | gen_1: start
+2025-03-06 19:20:20,213 INFO: mlp_0 has been submitted
+2025-03-06 19:21:20,306 INFO: All training_mlp tasks have been completed
+2025-03-06 19:21:20,384 INFO: LiF: Task is submitted
+2025-03-06 19:21:30,392 INFO: All MD calculations have been completed
+2025-03-06 19:21:31,819 INFO: Complete coding process.
+2025-03-06 19:21:33,651 INFO: mean_descriptor pre-sampling process. The number of classes:[0] The number of stru for all classes:[0] body_min_cover_stru:[0] type_coverage_rate:[[100.0]] max_min_freq: [NaN, NaN]
+2025-03-06 19:21:33,651 INFO: num of select stru [0, 0]
+2025-03-06 19:21:39,026 INFO: Complete the AEE_sampling process. The number of classes:[0, 0] The number of stru for all classes:[0, 0] body_min_cover_stru:[0, 0] type_coverage_rate:[[100.0, 100.0], [100.0, 100.0]] max_min_freq: [NaN, NaN]
+2025-03-06 19:21:39,026 INFO: num of select stru [0, 0]
+2025-03-06 19:21:39,028 INFO: num of select_num_mean_pre_sample:0, num of select_num_AEE_sample:0, num of repetition:0, total_num:0
+2025-03-06 19:21:39,031 INFO: The active learning loop ends
+2025-03-06 19:21:42,281 INFO: main_1 | gen_0: start
+2025-03-06 19:21:42,391 INFO: LiF: Task is submitted
+2025-03-06 19:27:39,445 INFO: mtp already exists
+2025-03-06 19:27:39,521 INFO: All MD calculations have been completed
+2025-03-06 19:27:41,182 INFO: Complete coding process.
+2025-03-06 19:27:43,042 INFO: mean_descriptor pre-sampling process. The number of classes:[0] The number of stru for all classes:[0] body_min_cover_stru:[0] type_coverage_rate:[[100.0]] max_min_freq: [NaN, NaN]
+2025-03-06 19:27:43,043 INFO: num of select stru [0, 0]
+2025-03-06 19:27:48,355 INFO: Complete the AEE_sampling process. The number of classes:[0, 0] The number of stru for all classes:[0, 0] body_min_cover_stru:[0, 0] type_coverage_rate:[[100.0, 100.0], [100.0, 100.0]] max_min_freq: [NaN, NaN]
+2025-03-06 19:27:48,358 INFO: num of select stru [0, 0]
+2025-03-06 19:27:48,368 INFO: num of select_num_mean_pre_sample:0, num of select_num_AEE_sample:0, num of repetition:0, total_num:0
+2025-03-06 19:27:48,372 INFO: The active learning loop ends
+The numbers of all structures is 105
