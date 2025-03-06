@@ -2,7 +2,9 @@
 Covering Set Optimazation driven Atomic Environment Sampling strategy for machine learning interatomic potential 
 
 # Installation
-cd CSO-AES/cso-ase, python setup.py install
+cd CSO-AES/cso-ase
+
+python setup.py install
 
 if scf_engine is ABACUS, please install ase-abacus (pip install git+https://gitlab.com/1041176461/ase-abacus.git)
 
