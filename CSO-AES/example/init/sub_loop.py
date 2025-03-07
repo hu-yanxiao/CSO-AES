@@ -35,7 +35,7 @@ def main():
     elif bsub_script.scf_cal_engine == 'cp2k':
         from cso_aes_das.cp2k_main_xyz import cp2k_main_xyz as scf2xyz
     elif bsub_script.scf_cal_engine == 'vasp':
-        from sus_das.vasp_main_xyz import vasp_main_xyz as scf2xyz
+        from cso_aes_das.vasp_main_xyz import vasp_main_xyz as scf2xyz
     else:
         raise ValueError(f'{lmp_in.scf_cal_engine} no exist! but you can add new_scf_cal_engine by yourself.')
 
