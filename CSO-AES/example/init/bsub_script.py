@@ -50,7 +50,7 @@ lmp_exe = 'mpirun -machinefile $LSB_DJOB_HOSTFILE -np $NP /work/phy-huangj/app/i
 scf_queue = 33
 scf_cores = 40
 scf_ptile = 40
-scf_cal_engine = 'abacus'       # abacus and cp2k
+scf_cal_engine = 'abacus'       # abacus,vasp and cp2k
 
 ##BSUB -J lmp_
 ##BSUB -J lmp_
