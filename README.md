@@ -4,6 +4,8 @@ Covering Set Optimazation driven Atomic Environment Sampling strategy for machin
 # Installation
 cd CSO-AES/cso_aes
 
+conda create --name cso_aes python=3.10
+
 python setup.py install
 
 if scf_cal_engine = ABACUS, please  install ase-abacus (pip install git https://gitlab.com/1041176461/ase-abacus.git) .
