@@ -2,9 +2,9 @@
 Covering Set Optimazation driven Atomic Environment Sampling strategy for machine learning interatomic potential 
 
 # Installation
-cd CSO-AES/cso_aes
-
 conda create --name cso_aes python=3.10
+
+cd CSO-AES/cso_aes
 
 python setup.py install
 
