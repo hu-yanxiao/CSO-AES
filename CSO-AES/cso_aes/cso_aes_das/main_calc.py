@@ -61,8 +61,10 @@ def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine):
                 llist = atoms.cell.cellpar()
                 os.chdir(sub_sub_dir)
                 INPUT(dir, sub_sub_dir, scf_cal_engine)
-                cell = f'     ABC {llist[0]}  {llist[1]}  {llist[2]} \n'
-                angles = f'     ALPHA_BETA_GAMMA {llist[3]}  {llist[4]}  {llist[5]}\n'
+                cell_A = f'      A    {llist[0][0]:.8f}     {llist[0][1]:.8f}     {llist[0][2]:.8f}\n'
+                cell_B = f'      B    {llist[1][0]:.8f}     {llist[1][1]:.8f}     {llist[1][2]:.8f}\n'
+                cell_C = f'      C    {llist[2][0]:.8f}     {llist[2][1]:.8f}     {llist[2][2]:.8f}\n'
+
                 cp2k_inp = 'cp2k.inp'
                 with open(cp2k_inp, 'r') as f:
                     lines = f.readlines()
@@ -71,8 +73,9 @@ def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine):
                         if '&CELL' in line:
                             break
 
-                    lines[tt + 1] = cell
-                    lines[tt + 2] = angles
+                    lines[tt + 1] = cell_A
+                    lines[tt + 2] = cell_B
+                    lines[tt + 3] = cell_C
                 with open(cp2k_inp, 'w') as file:
                     file.writelines(lines)
             elif scf_cal_engine == 'vasp':

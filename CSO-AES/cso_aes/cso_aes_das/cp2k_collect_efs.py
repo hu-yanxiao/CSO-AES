@@ -6,7 +6,7 @@ from ase.io import read,write,iread
 # Constants definition
 HA_TO_EV = 27.211386245988  # 1 Ha = 27.211 eV
 HA_BOHR_TO_EV_ANGSTROM = 51.422086190832  # 1 Ha/Bohr = 51.422 eV/Å
-GPA_TO_EV_A3 = 0.062415091258833  # 1 GPa = 0.0624 eV/Å³
+GPA_TO_EV_A3 = 0.0062415091258833  # 1 GPa = 0.00624 eV/Å³
 
 def parse_forces_and_stress(logout_path):
     """ Parse the logout file to extract energy, atomic forces, and stress tensor """
