@@ -58,7 +58,7 @@ def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine):
             elif scf_cal_engine == 'cp2k':
                 atoms = xyz[ii - 1]
                 write(os.path.join(sub_sub_dir, 'cp2k.xyz'), atoms, format='extxyz')
-                llist = atoms.cell.cellpar()
+                llist = atoms.get_cell()
                 os.chdir(sub_sub_dir)
                 INPUT(dir, sub_sub_dir, scf_cal_engine)
                 cell_A = f'      A    {llist[0][0]:.8f}     {llist[0][1]:.8f}     {llist[0][2]:.8f}\n'
