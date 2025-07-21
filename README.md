@@ -14,8 +14,8 @@ if scf_cal_engine = ABACUS, please  install ase-abacus (pip install git https://
 
 if scf_cal_engine = VASP, please install VASPKIT (https://vaspkit.com/installation.html) to automatically generate POTCAR file.
 
-
-# pysus2mlip installation
+# Additional Installation Dependencies for the Program
+# ①pysus2mlip installation
 tar -zxvf pysus2mlip.tar.gz
 
 cd pysus2mlip
