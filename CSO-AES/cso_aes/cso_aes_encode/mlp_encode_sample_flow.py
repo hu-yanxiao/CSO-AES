@@ -288,7 +288,7 @@ def main_sample_flow(pwd, dirs, bw, bw_method, body_list, ele, ele_model, mtp_ty
         md_data = os.path.join(md_path, f"md_{body}_body_coding_zlib.pkl")
         start = time.time()
         large_zero_freq_intervals_list, large_max_min, large_bins = data_base_distribution(data_base_data, bw, method, body,
-                                                                                           plot_model=True)
+                                                                                           plot_model=False)
         #print(large_zero_freq_intervals_list)
         end = time.time()
         print(f'body_{body}_data_base_distribution_time:', end - start)
