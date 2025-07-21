@@ -10,7 +10,7 @@ python setup.py install
 
 pip install -r requirement.txt
 
-if scf_cal_engine = ABACUS, please  install [ase-abacus](pip install git https://gitlab.com/1041176461/ase-abacus.git).
+if scf_cal_engine = ABACUS, please  install ase-abacus (pip install git https://gitlab.com/1041176461/ase-abacus.git).
 
 if scf_cal_engine = VASP, please install [VASPKIT](https://vaspkit.com/installation.html) to automatically generate POTCAR file.
 
