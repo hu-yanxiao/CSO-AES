@@ -25,3 +25,4 @@ modify the location of the sus2-related files in the program. Then execute: CC=i
 ![pysus2mlip](https://github.com/user-attachments/assets/c432dc3b-16b2-4ac0-8e53-f3ade9aec096)
 
 # 2.LAMMPS installation
+SUS2-MLIP models can be used in LAMMPS simulation via the interface [interface-lammps-mlip-v2](https://gitlab.com/ashapeev/interface-lammps-mlip-2/-/tree/master?ref_type=heads).
