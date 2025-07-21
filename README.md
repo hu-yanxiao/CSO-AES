@@ -15,7 +15,9 @@ if scf_cal_engine = ABACUS, please  install ase-abacus (pip install git https://
 if scf_cal_engine = VASP, please install [VASPKIT](https://vaspkit.com/installation.html) to automatically generate POTCAR file.
 
 # Additional Installation Dependencies for the Program
-# 1.pysus2mlip installation
+# 1.SUS2-MLIP installation  
+install [SUS2-MLIP](https://github.com/hu-yanxiao/SUS2-MLIP)
+# 2.pysus2mlip installation
 tar -zxvf pysus2mlip.tar.gz
 
 cd pysus2mlip
@@ -24,5 +26,5 @@ modify the location of the sus2-related files in the program. Then execute: CC=i
 
 ![pysus2mlip](https://github.com/user-attachments/assets/c432dc3b-16b2-4ac0-8e53-f3ade9aec096)
 
-# 2.LAMMPS installation
+# 3.LAMMPS installation
 SUS2-MLIP models can be used in LAMMPS simulation via the interface [interface-lammps-mlip-v2](https://gitlab.com/ashapeev/interface-lammps-mlip-2/-/tree/master?ref_type=heads).
