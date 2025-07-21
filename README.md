@@ -14,7 +14,7 @@ if scf_cal_engine = VASP, please install [VASPKIT](https://vaspkit.com/installat
 install [SUS2-MLIP](https://github.com/hu-yanxiao/SUS2-MLIP)
 # 2.pysus2mlip installation
 tar -zxvf pysus2mlip.tar.gz  
-cd pysus2mlip
+cd pysus2mlip  
 Modify the correct SUS2-related file locations as shown in the content of setup.py. Then execute: CC=icc CXX=icpc pip install -e .  
 
 ![pysus2mlip](https://github.com/user-attachments/assets/c432dc3b-16b2-4ac0-8e53-f3ade9aec096)
