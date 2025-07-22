@@ -24,3 +24,4 @@ SUS2-MLIP models can be used in [LAMMPS](https://github.com/lammps/lammps) simul
 
 # Tutorial
 Video: [Install](https://b23.tv/PSIvqp5) [Run](https://b23.tv/dy2E1WQ) [introduction](https://b23.tv/2xEr8Tz)
+Sample Manual: [Onenote](https://pan.quark.cn/s/85215f61ed71?pwd=r8Fz)
