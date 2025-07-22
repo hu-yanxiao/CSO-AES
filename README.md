@@ -20,7 +20,7 @@ Modify the correct SUS2-related file locations as shown in the content of setup.
 ![pysus2mlip](https://github.com/user-attachments/assets/c432dc3b-16b2-4ac0-8e53-f3ade9aec096)
 
 # 3. LAMMPS installation
-SUS2-MLIP models can be used in LAMMPS simulation via the interface [interface-lammps-mlip-v2](https://gitlab.com/ashapeev/interface-lammps-mlip-2/-/tree/master?ref_type=heads).
+SUS2-MLIP models can be used in [LAMMPS](https://github.com/lammps/lammps) simulation via the interface [interface-lammps-mlip-v2](https://gitlab.com/ashapeev/interface-lammps-mlip-2/-/tree/master?ref_type=heads).
 
 # Tutorial
 Video: [Install](https://b23.tv/PSIvqp5) [Run](https://b23.tv/dy2E1WQ) [introduction](https://b23.tv/2xEr8Tz)
