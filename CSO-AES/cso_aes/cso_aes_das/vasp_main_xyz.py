@@ -38,6 +38,8 @@ def nmax_label(logout,nmax):
         for line in file:
             if 'DAV:' in line:
                 string = line.split()
+            elif 'RMM:' in line:
+                string = line.split()
         log_nmax = int(string[1])
     label = True
     #print(log_nmax)
@@ -108,4 +110,5 @@ if __name__ =='__main__':
     ori_out_name = os.path.join(pwd, 'scf_lammps_data', 'ori_scf_filter.xyz')
     force_threshold = 10
     ok_count, len_count, no_success_bsub_path, force_count, force_of_force_count_0 = vasp_main_xyz(current, out_name, ori_out_name, force_threshold)
+
     print(ok_count, len_count, no_success_bsub_path, force_count)
