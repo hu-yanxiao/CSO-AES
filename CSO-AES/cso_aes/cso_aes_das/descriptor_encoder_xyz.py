@@ -14,21 +14,22 @@ class sample_plot():
     def plot_PCAfeature_coverage(self,all_features, selected_indexes, method="Effectively"):
         #fig, ax = plt.subplots(figsize=(6, 6))
         selected_features = all_features[selected_indexes]
-        plt.plot(all_features[:, 0], all_features[:, 1], "*", alpha=0.5, label=f"All {len(all_features):,} structures")
-        plt.plot(
-            selected_features[:, 0],
-            selected_features[:, 1],
-            "*",
-            alpha=0.5,
-            label=f"{method} sampled {len(selected_features):,}",
-        )
-        legend = plt.legend(frameon=False, fontsize=14, loc="upper left", bbox_to_anchor=(-0.02, 1.02), reverse=True)
-        for lh in legend.legend_handles:
-            lh.set_alpha(1)
-        plt.ylabel("PC 2", size=20)
-        plt.xlabel("PC 1", size=20)
-        plt.savefig('cover_fig.png',dpi=300)
-        #plt.show()
+        if len(all_features) > 1:
+            plt.plot(all_features[:, 0], all_features[:, 1], "*", alpha=0.5, label=f"All {len(all_features):,} structures")
+            plt.plot(
+                selected_features[:, 0],
+                selected_features[:, 1],
+                "*",
+                alpha=0.5,
+                label=f"{method} sampled {len(selected_features):,}",
+            )
+            legend = plt.legend(frameon=False, fontsize=14, loc="upper left", bbox_to_anchor=(-0.02, 1.02), reverse=True)
+            for lh in legend.legend_handles:
+                lh.set_alpha(1)
+            plt.ylabel("PC 2", size=20)
+            plt.xlabel("PC 1", size=20)
+            plt.savefig('cover_fig.png',dpi=300)
+            #plt.show()
 
     def calculate_feature_coverage_score(self,all_features, selected_indexes, n_bins=100):
         selected_features = all_features[selected_indexes]
@@ -157,6 +158,7 @@ class encoder():
         self.save(vectors, self.save_path)
         print(f'MBTR.shape = {vectors.shape}')
         return vectors
+
 
 
 
