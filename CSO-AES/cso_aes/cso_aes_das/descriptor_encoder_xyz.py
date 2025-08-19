@@ -14,7 +14,7 @@ class sample_plot():
     def plot_PCAfeature_coverage(self,all_features, selected_indexes, method="Effectively"):
         #fig, ax = plt.subplots(figsize=(6, 6))
         selected_features = all_features[selected_indexes]
-        if len(all_features) > 1:
+        if all_features.shape[1] > 1:
             plt.plot(all_features[:, 0], all_features[:, 1], "*", alpha=0.5, label=f"All {len(all_features):,} structures")
             plt.plot(
                 selected_features[:, 0],
@@ -158,6 +158,7 @@ class encoder():
         self.save(vectors, self.save_path)
         print(f'MBTR.shape = {vectors.shape}')
         return vectors
+
 
 
 
