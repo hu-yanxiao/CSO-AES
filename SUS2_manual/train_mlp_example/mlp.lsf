@@ -1,0 +1,18 @@
+#!/bin/bash
+#BSUB -J hj_train
+#BSUB -q 1t81c
+#BSUB -n 120
+#BSUB -R "span[ptile=120]"
+#BSUB -e %J.err
+#BSUB -o %J.out
+
+hostfile=`echo $LSB_DJOB_HOSTFILE`
+NP=`cat $hostfile | wc -l`
+cd $LS_SUBCWD
+
+
+module load mpi/2021.6.0 compiler/2022.1.0 mkl/2022.2.0  
+COMMAND_std="mpiexec.hydra -machinefile $LSB_DJOB_HOSTFILE -np $NP /work/phy-huangj/hyx/app-test/SUS2-MLIP/bin/mlp-sus2 train hyx.mtp train.cfg    --stdd-weight=0.00000000000000000   --std-weight=0.0000   --scale-by-force=10 --max-iter=3000 --curr-pot-name=current.mtp --trained-pot-name=p.mtp"
+$COMMAND_std > logout 2>&1
+
+
