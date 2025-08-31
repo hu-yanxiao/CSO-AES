@@ -1,4 +1,5 @@
-①首先通过： python sort_ele_xyz2cfg.py train.xyz    会自动把xyz转成train.cfg文件。这里的cfg 原子type会自动按原子序数排序为，1，2，3...
+①首先通过： python sort_ele_xyz2cfg.py train.xyz    会自动把xyz转成train.cfg文件。这里的cfg 原子type会自动按原子序数排序为，1，2，3..
 
 ②hyx.mtp为初始的势函数模型，注意要修改元素的种类。
+
 ③修改提交脚本的中势函数编译后程序的位置。scale-by-force 参数为对力大的结构施加的权重会小，这样误差会小点，受异常值影响较小。
