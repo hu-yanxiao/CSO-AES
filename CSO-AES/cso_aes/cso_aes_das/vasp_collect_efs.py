@@ -9,7 +9,7 @@ def remove(file):
 
 def collect_efs(input_path):
     vasp_xml = os.path.join(input_path, 'vasprun.xml')
-    keep_files = ['vasprun.xml', 'POSCAR','__ok__','logout']
+    keep_files = ['vasprun.xml', 'POSCAR','__ok__','OSZICAR','logout']
     all_files = glob.glob(os.path.join(input_path, '*'))
     # 过滤出需要删除的文件
     files_to_delete = [file for file in all_files if os.path.basename(file) not in keep_files]

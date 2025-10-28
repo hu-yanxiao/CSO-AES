@@ -1,7 +1,7 @@
 from ase.io import iread, write
 import os
 import shutil
-from .gen_calc_file import poscar2STRU,INPUT
+from .gen_calc_file import poscar2STRU,INPUT,create_potcar
 from tqdm import trange
 import yaml
 import sys
@@ -35,7 +35,7 @@ def mkdir(dir):
         os.mkdir(dir)
 
 ####数据集划分#######
-def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine):
+def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine,gen_potcar_mode,potcar_dir):
     quotient = num_posacr // calc_dir_num
     remainder = num_posacr % calc_dir_num
     temp = [quotient] * calc_dir_num
@@ -78,6 +78,21 @@ def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine):
                     lines[tt + 3] = cell_C
                 with open(cp2k_inp, 'w') as file:
                     file.writelines(lines)
+
+                r2scan_inp = 'cp2k_r2scan.inp'
+                if os.path.exists(r2scan_inp):
+                    with open( r2scan_inp, 'r') as f:
+                        lines = f.readlines()
+                        for index, line in enumerate(lines):
+                            tt = index
+                            if '&CELL' in line:
+                                break
+                        lines[tt + 1] = cell_A
+                        lines[tt + 2] = cell_B
+                        lines[tt + 3] = cell_C
+                    with open(r2scan_inp, 'w') as file:
+                        file.writelines(lines)
+
             elif scf_cal_engine == 'vasp':
                 b = xyz[ii-1]
                 sorted_indices = sorted(range(len(b)), key=lambda i: b[i].symbol)
@@ -89,7 +104,10 @@ def mkdir_Placefile(dir,num_posacr,calc_dir_num,xyz,scf_cal_engine):
                 write(os.path.join(sub_sub_dir,'POSCAR'), sorted_atoms, format='vasp')
                 os.chdir(sub_sub_dir)
                 INPUT(dir,sub_sub_dir,scf_cal_engine)
-                os.system(f'(echo 103)|vaspkit')
+                if gen_potcar_mode == 'vaspkit':
+                    os.system(f'(echo 103)|vaspkit')
+                else:
+                    create_potcar('POSCAR', potcar_dir, output_file="POTCAR")
             else:
                 raise ValueError(f'{scf_cal_engine} is not exist!')
 
@@ -104,13 +122,21 @@ def main_calc(atom_list,calc_dir_num,path_main):
     sys.path.append(os.path.join(os.path.dirname(__file__), os.path.join(path, 'init')))
     import bsub_script
 
+    if os.path.exists(os.path.join(path, 'init','POTCAR_dir')):
+        gen_potcar_mode = 'my_potcar'
+        potcar_dir = os.path.join(path, 'init', 'POTCAR_dir')
+    else:
+        gen_potcar_mode = 'vaspkit'
+        potcar_dir = ''
+
+
     pwd = os.getcwd()
     dir = os.path.join(pwd,'filter')
     mkdir(dir)
 
     num_posacr = len(atom_list)
 
-    mkdir_Placefile(dir,num_posacr,calc_dir_num,atom_list,bsub_script.scf_cal_engine)
+    mkdir_Placefile(dir,num_posacr,calc_dir_num,atom_list,bsub_script.scf_cal_engine,gen_potcar_mode,potcar_dir)
 
     os.chdir(pwd)
     jobs_script = os.path.join(pwd,'jobs_script')
@@ -130,8 +156,32 @@ def main_calc(atom_list,calc_dir_num,path_main):
 {bsub_script.bsub_script_scf_job_name} {jobname}_{str(i)} 
 '''
         content_1 = content_1 + bsub_script.bsub_script_scf
+        if (hasattr(bsub_script, 'cp2k_r2scan_scan_mode') and
+                bsub_script.scf_cal_engine == 'cp2k' and
+                bsub_script.cp2k_r2scan_scan_mode == True):
+            content_2 = f'''dir_1="filter"
+dir_2="{'dir_' + str(i)}"
+cd ../$dir_1/$dir_2
 
-        content_2 = f'''dir_1="filter"
+path=$(pwd)
+
+for item in {{{range1}..{range2}}}; do
+    cd $path/$item
+    start_time=$(date +%s.%N)
+    touch __start__
+    $COMMAND_std_1 > logout_1 2>&1
+    $COMMAND_std_2 > logout_2 2>&1
+    touch __ok__
+
+    end_time=$(date +%s.%N)
+    runtime=$(echo "$end_time - $start_time" | bc)
+    cd $path
+    cd ..
+    echo "job_{str(i)}_$item total_runtime:$runtime s" >> time.txt
+done'''
+
+        else:
+            content_2 = f'''dir_1="filter"
 dir_2="{'dir_' + str(i)}"
 cd ../$dir_1/$dir_2
 
