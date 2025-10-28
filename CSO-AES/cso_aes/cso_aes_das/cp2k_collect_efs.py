@@ -56,7 +56,8 @@ def collect_efs(input_path):
     write(temp_poscar,old_atoms ,format='vasp')
     atoms = read(temp_poscar)
     atoms.info['energy'] = energy
-    atoms.info['virial'] = np.array(stress)
+    atoms.info['stress'] = np.array(stress)
+    atoms.info['virial'] = np.array(stress) * atoms.get_volume()
     atoms.info['pbc'] = "T T T"
     atoms.arrays['forces'] = np.array(forces)
     atoms.pbc = [True, True, True]
