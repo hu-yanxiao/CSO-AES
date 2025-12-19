@@ -6,3 +6,5 @@ dscribe==2.1.1
 Cython==3.0.11
 numpy==1.26.4
 pyyaml==6.0.2
+pip==24.2
+
